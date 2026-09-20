@@ -24,9 +24,11 @@ from semif_phase1.direct import _slot_ids  # noqa: E402
 
 MODEL = "Qwen/Qwen3.5-4B"
 REV = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
-OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parent / "results" / "vision_probe_results.jsonl"
+OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parent / "results" / "local" / "vision_probe_results.jsonl"
 IMG_DIR = OUT.parent / "vision_probe_images"
 IMG_DIR.mkdir(parents=True, exist_ok=True)
+if OUT.exists():
+    OUT.unlink()  # re-runs overwrite the local copy; the committed results live one level up
 
 
 def font(size):

@@ -7,3 +7,4 @@ results*.jsonl
 reranker-results*.jsonl
 models/
 cache/
+vision/results/local/
