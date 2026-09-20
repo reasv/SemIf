@@ -1,5 +1,63 @@
 # SemIf (formerly OpenJev)
 
+## This fork: image input and a real-time per-frame pipeline
+
+This fork adds vision to SemIf without changing the model or the readout. The same
+frozen Qwen3.5-4B checkpoint is loaded with its vision tower, an image goes into the
+user turn ahead of SemIf's JSON payload, and the same option-letter logits are read at
+the last position. Nothing is trained. Everything lives in [`vision/`](vision/README.md);
+the shipped text paths, benchmarks, and published results below are unchanged and the
+repo's own checks still pass. Target platform: Linux, one sm_120 GPU (RTX PRO 6000 /
+RTX 50xx), the repo's pinned torch 2.10 and transformers 5.17.
+
+**What was added**
+
+- A per-frame pipeline: vision encoder once, then one captured CUDA graph that prefills
+  the image prefix, replicates the cache to N branches, and scores N criteria as short
+  suffixes. Each branch sees only its own criterion.
+- A cached static text block before the image (rules, a state schema): prefilled once,
+  its linear-attention state and KV copied per frame, so 2000 tokens of context cost
+  about 5 ms per frame instead of 90.
+- FlashAttention-4 on consumer Blackwell: a runtime fix for its sm_120 tile config at
+  head_dim 256, plus a build script and prebuilt wheel for `causal-conv1d` on CUDA 13
+  systems.
+- A prompt-format experiment on the repo's own fixtures with the repo's evaluator, and a
+  synthetic-image probe (8/8).
+
+**Results** (one RTX PRO 6000, 640x480 frames, compact format, warm, GPU otherwise idle)
+
+| Decisions per frame | 1 | 8 | 16 | 32 | 64 |
+|---|---:|---:|---:|---:|---:|
+| Per frame | 46 ms | 63 ms | 82 ms | 124 ms | 214 ms |
+
+| Cached static context before the image, 16 decisions | 0 tokens | 520 | 2010 |
+|---|---:|---:|---:|
+| Per frame (FA4) | 86 ms | 89 ms | 94 ms |
+| Same, recomputing the prefix every frame | 86 ms | 108 ms | 174 ms |
+
+Shared-prefix and graph outputs match independent full forwards with a worst
+probability gap of 0.02 to 0.03 and 16/16 argmax agreement. Decisions per frame are a
+token budget: about 45 ms fixed, then roughly 2.6 ms per decision at the padded suffix
+width; around 20 decisions fit under 100 ms.
+
+The format experiment replaced SemIf's per-option `{"letter", "description"}` objects
+with an `{"A": ..., "B": ...}` map ("compact"). Same system prompt, same readout:
+
+| Fixture, mean family balanced accuracy | json (shipped) | compact | plain text |
+|---|---:|---:|---:|
+| Authored 144 | 0.813 | **0.904** (+0.091, CI [+0.058, +0.134]) | 0.871 |
+| Perturbations 108 | 0.766 | **0.830** (+0.064, CI [+0.010, +0.125]) | 0.816 |
+| WANLI 256 | 0.625 | 0.648 | **0.679** (+0.055, CI [+0.005, +0.105]) |
+
+The shipped format reproduces the published 0.8132 exactly on this hardware. Compact is
+shorter (a yes/no suffix is 40 tokens instead of 54) and is the recommended format in
+`vision/`; the published claims below are about the shipped format and are left as is.
+
+**What is not established.** Every number above is latency or a text fixture. No
+accuracy on real video frames has been measured; the probe images are trivially easy.
+Probabilities are option scores, not calibrated confidences. See
+[`vision/README.md`](vision/README.md) for setup, the quick start, and caveats.
+
 <div align="center">
 
 **Semantic ifs from open models, on a 3090 at home.**
@@ -28,10 +86,6 @@ This baseline reads typed option probabilities directly from a model. No answer 
 
 - Added MiniCPM5 2B and Qwen3.5 4B to the browser demo.
 - Added **Unsloppify site**, a switch to a conventional interface.
-
-## Vision fork (this repository)
-
-This fork adds image input and a real-time per-frame pipeline on the same frozen model and readout: 16 typed decisions per 640x480 frame in about 85 ms on one RTX PRO 6000 (sm_120), a cached static-context prefix, FlashAttention-4 on consumer Blackwell, and a prompt-format experiment that raises the authored balanced accuracy from 0.813 to 0.904. See [vision/README.md](vision/README.md). The shipped text paths, benchmarks and published results below are unchanged from upstream.
 
 ## Quick start
 
