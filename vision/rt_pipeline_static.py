@@ -32,7 +32,7 @@ from shared_image import load, frame, CRITERIA, EVIDENCE, DEV
 from semif_phase1.core import DIRECT_SYSTEM, LETTERS, softmax
 from semif_phase1.direct import _slot_ids
 
-RESULTS = os.environ.get("SEMIF_RESULTS", os.path.join(_HERE, "results", "rt_pipeline_static_results.txt"))
+RESULTS = os.environ.get("SEMIF_RESULTS", os.path.join(_HERE, "results", "local", "rt_pipeline_static_results.txt"))
 
 
 # ----------------------------------------------------------------------------- prompts
@@ -382,6 +382,7 @@ def main():
                 f"reorder_cache={parts[2]:5.2f}  suffixes+head={parts[3]:6.2f}  total={sum(parts):6.2f}")
             del pipe; torch.cuda.empty_cache()
     log(f"peak vram {torch.cuda.max_memory_allocated()/2**30:.1f} GiB")
+    os.makedirs(os.path.dirname(RESULTS), exist_ok=True)
     with open(RESULTS, "w") as f:
         f.write("\n".join(lines) + "\n")
     print(f"wrote {RESULTS}")
