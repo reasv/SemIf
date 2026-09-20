@@ -29,6 +29,10 @@ This baseline reads typed option probabilities directly from a model. No answer 
 - Added MiniCPM5 2B and Qwen3.5 4B to the browser demo.
 - Added **Unsloppify site**, a switch to a conventional interface.
 
+## Vision fork (this repository)
+
+This fork adds image input and a real-time per-frame pipeline on the same frozen model and readout: 16 typed decisions per 640x480 frame in about 85 ms on one RTX PRO 6000 (sm_120), a cached static-context prefix, FlashAttention-4 on consumer Blackwell, and a prompt-format experiment that raises the authored balanced accuracy from 0.813 to 0.904. See [vision/README.md](vision/README.md). The shipped text paths, benchmarks and published results below are unchanged from upstream.
+
 ## Quick start
 
 **Apple Silicon:** use the native [MLX backend](docs/MLX.md) for direct scoring,

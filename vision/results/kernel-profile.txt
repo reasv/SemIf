@@ -1,0 +1,40 @@
+/home/admin/projects/SemIf/.venv/lib/python3.12/site-packages/torch/profiler/profiler.py:217: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+=== B=16 L=48 (5 iters) ===
+----------------------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                                  Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+----------------------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16...         0.00%       0.000us         0.00%       0.000us       0.000us      48.891ms        31.35%      48.891ms     152.784us           320  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16...         0.00%       0.000us         0.00%       0.000us       0.000us      40.099ms        25.71%      40.099ms      91.134us           440  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16...         0.00%       0.000us         0.00%       0.000us       0.000us      17.108ms        10.97%      17.108ms     106.926us           160  
+void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_...         0.00%       0.000us         0.00%       0.000us       0.000us       7.907ms         5.07%       7.907ms      14.119us           560  
+void at::native::(anonymous namespace)::conv_depthwise2d_forward_ke...         0.00%       0.000us         0.00%       0.000us       0.000us       7.292ms         4.68%       7.292ms      60.770us           120  
+void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_...         0.00%       0.000us         0.00%       0.000us       0.000us       4.664ms         2.99%       4.664ms       4.442us          1050  
+void at::native::unrolled_elementwise_kernel<at::native::direct_cop...         0.00%       0.000us         0.00%       0.000us       0.000us       4.579ms         2.94%       4.579ms       3.648us          1255  
+void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, ...         0.00%       0.000us         0.00%       0.000us       0.000us       2.368ms         1.52%       2.368ms       4.510us           525  
+                        chunk_gated_delta_rule_fwd_kernel_h_blockdim64         0.00%       0.000us         0.00%       0.000us       0.000us       1.823ms         1.17%       1.823ms      15.188us           120  
+                                                    chunk_fwd_kernel_o         0.00%       0.000us         0.00%       0.000us       0.000us       1.640ms         1.05%       1.640ms      13.665us           120  
+void at::native::vectorized_elementwise_kernel<4, at::native::(anon...         0.00%       0.000us         0.00%       0.000us       0.000us       1.618ms         1.04%       1.618ms       3.082us           525  
+void at::native::vectorized_elementwise_kernel<4, at::native::bfloa...         0.00%       0.000us         0.00%       0.000us       0.000us       1.381ms         0.89%       1.381ms       2.108us           655  
+----------------------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 65.478ms
+Self CUDA time total: 155.940ms
+=== B=1 L=340 (5 iters) ===
+----------------------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                                  Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+----------------------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16...         0.00%       0.000us         0.00%       0.000us       0.000us      43.213ms        46.06%      43.213ms      90.028us           480  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16...         0.00%       0.000us         0.00%       0.000us       0.000us       7.824ms         8.34%       7.824ms      48.898us           160  
+void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_...         0.00%       0.000us         0.00%       0.000us       0.000us       6.509ms         6.94%       6.509ms      11.624us           560  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16...         0.00%       0.000us         0.00%       0.000us       0.000us       4.076ms         4.34%       4.076ms      33.966us           120  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16...         0.00%       0.000us         0.00%       0.000us       0.000us       3.443ms         3.67%       3.443ms      21.517us           160  
+void at::native::unrolled_elementwise_kernel<at::native::direct_cop...         0.00%       0.000us         0.00%       0.000us       0.000us       3.184ms         3.39%       3.184ms       2.537us          1255  
+void at::native::(anonymous namespace)::conv_depthwise2d_forward_ke...         0.00%       0.000us         0.00%       0.000us       0.000us       3.052ms         3.25%       3.052ms      25.434us           120  
+void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_...         0.00%       0.000us         0.00%       0.000us       0.000us       2.637ms         2.81%       2.637ms       2.511us          1050  
+void cublasLt::splitKreduce_kernel<32, 16, int, __nv_bfloat16, __nv...         0.00%       0.000us         0.00%       0.000us       0.000us       2.046ms         2.18%       2.046ms       3.196us           640  
+void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, ...         0.00%       0.000us         0.00%       0.000us       0.000us       1.997ms         2.13%       1.997ms       3.805us           525  
+                           chunk_gated_delta_rule_fwd_kkt_solve_kernel         0.00%       0.000us         0.00%       0.000us       0.000us       1.444ms         1.54%       1.444ms      12.037us           120  
+                        chunk_gated_delta_rule_fwd_kernel_h_blockdim64         0.00%       0.000us         0.00%       0.000us       0.000us       1.211ms         1.29%       1.211ms      10.093us           120  
+----------------------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 109.022ms
+Self CUDA time total: 93.827ms

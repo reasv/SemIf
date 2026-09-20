@@ -1,0 +1,8 @@
+{"id": "color-red", "expected": "red", "argmax": "red", "correct": true, "probabilities": {"red": 0.9988, "blue": 0.0008, "green": 0.0004}, "input_tokens": 318, "image_tokens": 196, "forward_seconds": 3.3304}
+{"id": "color-blue", "expected": "blue", "argmax": "blue", "correct": true, "probabilities": {"red": 0.0059, "blue": 0.9934, "green": 0.0007}, "input_tokens": 318, "image_tokens": 196, "forward_seconds": 0.1103}
+{"id": "shape-square", "expected": "square", "argmax": "square", "correct": true, "probabilities": {"circle": 0.0086, "square": 0.9905, "triangle": 0.0009}, "input_tokens": 311, "image_tokens": 196, "forward_seconds": 0.0995}
+{"id": "count-3", "expected": "three", "argmax": "three", "correct": true, "probabilities": {"two": 0.0139, "three": 0.971, "four": 0.0139, "five": 0.0013}, "input_tokens": 330, "image_tokens": 200, "forward_seconds": 0.0977}
+{"id": "count-5", "expected": "five", "argmax": "five", "correct": true, "probabilities": {"two": 0.0066, "three": 0.0031, "four": 0.0052, "five": 0.9851}, "input_tokens": 330, "image_tokens": 200, "forward_seconds": 0.0888}
+{"id": "deploy-failed", "expected": "no", "argmax": "no", "correct": true, "probabilities": {"yes": 0.0032, "no": 0.996, "insufficient": 0.0008}, "input_tokens": 515, "image_tokens": 392, "forward_seconds": 0.1078}
+{"id": "deploy-ok", "expected": "yes", "argmax": "yes", "correct": true, "probabilities": {"yes": 0.9975, "no": 0.0017, "insufficient": 0.0008}, "input_tokens": 515, "image_tokens": 392, "forward_seconds": 0.0901}
+{"id": "ticket-route", "expected": "billing", "argmax": "billing", "correct": true, "probabilities": {"account_access": 0.0017, "billing": 0.9981, "sales": 0.0002}, "input_tokens": 513, "image_tokens": 392, "forward_seconds": 0.0898}

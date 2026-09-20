@@ -1,0 +1,8 @@
+CHECK N=16: graph-vs-direct worst prob diff=0.0018  eager-pipeline-vs-direct=0.0018  argmax agree 16/16  (prefix=346 tokens incl 300 image, W=75)
+N=  1  graph: pre=  2.5 vision= 14.6 lm=  28.8 total=  46.2ms per-decision= 46.2ms  |  eager lm= 105.5 total= 122.8ms
+N=  4  graph: pre=  2.4 vision= 14.7 lm=  39.6 total=  57.0ms per-decision= 14.3ms  |  eager lm= 104.9 total= 122.3ms
+N=  8  graph: pre=  2.5 vision= 15.7 lm=  58.2 total=  76.4ms per-decision=  9.6ms  |  eager lm= 105.9 total= 124.5ms
+N= 16  graph: pre=  2.9 vision= 24.9 lm=  72.7 total= 100.7ms per-decision=  6.3ms  |  eager lm= 108.4 total= 127.4ms
+N= 32  graph: pre=  2.6 vision= 15.6 lm= 136.6 total= 154.9ms per-decision=  4.8ms  |  eager lm= 161.6 total= 180.8ms
+N= 64  graph: pre=  2.8 vision= 15.8 lm= 262.2 total= 280.9ms per-decision=  4.4ms  |  eager lm= 287.5 total= 305.3ms
+peak vram 13.2 GiB

@@ -1,0 +1,23 @@
+
+=== authored144 (144 rows) ===
+  parity json-vs-CLI: 144 rows, 0 argmax flips, worst prob diff 0.0000
+  parity json-vs-published (3090 run): 144 rows, 0 argmax flips, worst prob diff 0.0491
+  format    tokens  bal.acc    acc    nll  diff vs json [paired 95% CI]   flips
+  json       148.1   0.8132  0.806  0.424  
+  compact    129.1   0.9042  0.910  0.270  +0.0910 [+0.058, +0.134]   19
+  plain      117.8   0.8711  0.882  0.314  +0.0579 [+0.001, +0.109]   22
+
+=== perturbations108 (108 rows) ===
+  parity json-vs-CLI: 108 rows, 0 argmax flips, worst prob diff 0.0000
+  parity json-vs-published (3090 run): 108 rows, 2 argmax flips, worst prob diff 0.1118
+  format    tokens  bal.acc    acc    nll  diff vs json [paired 95% CI]   flips
+  json       166.0   0.7658  0.759  0.570  
+  compact    147.0   0.8296  0.815  0.489  +0.0638 [+0.010, +0.125]   14
+  plain      135.4   0.8155  0.815  0.416  +0.0497 [-0.010, +0.118]   15
+
+=== wanli256 (256 rows) ===
+  parity json-vs-published (3090 run): 256 rows, 5 argmax flips, worst prob diff 0.0904
+  format    tokens  bal.acc    acc    nll  diff vs json [paired 95% CI]   flips
+  json       149.7   0.6247  0.625  1.085  
+  compact    130.7   0.6481  0.648  1.038  +0.0234 [-0.010, +0.059]   22
+  plain      118.7   0.6792  0.680  0.878  +0.0545 [+0.005, +0.105]   45

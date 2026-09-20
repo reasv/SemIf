@@ -1,0 +1,9 @@
+# Extras for the vision/ pipelines, on top of `pip install -e '.[test]'` (torch 2.10.0+cu128, transformers 5.17.0).
+torchvision==0.25.0
+pillow>=11
+flash-linear-attention==0.5.2
+# FlashAttention-4 (CuTe DSL, pure-python wheel, has an sm_120 kernel). Pre-release: pip accepts the exact pin;
+# with uv add --prerelease=allow. vision/fa4_patch.py fixes its sm_120 head_dim=256 tile config at runtime.
+flash-attn-4==4.0.0b31
+# causal-conv1d has no wheel for torch 2.10 / cu128: run vision/setup_kernels.sh or install the wheel from the
+# fork's GitHub release. Without it transformers falls back to a (correct, ~1.5 ms slower) reference conv path.

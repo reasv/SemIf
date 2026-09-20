@@ -1,0 +1,6 @@
+224x224                tokens=  162 img=   64 preproc=   2.5ms  vision=  14.5ms  lm=  47.5ms  end2end=  64.5ms  p95=  66.9ms
+448x448                tokens=  294 img=  196 preproc=   3.3ms  vision=  14.6ms  lm=  47.8ms  end2end=  65.8ms  p95=  88.0ms
+640x480                tokens=  398 img=  300 preproc=   4.3ms  vision=  14.4ms  lm=  48.0ms  end2end=  66.8ms  p95=  74.1ms
+896x448                tokens=  490 img=  392 preproc=   6.7ms  vision=  25.8ms  lm=  83.8ms  end2end= 117.7ms  p95= 146.8ms
+1280x720                tokens=  978 img=  880 preproc=  16.7ms  vision=  21.6ms  lm=  50.4ms  end2end=  88.9ms  p95=  90.0ms
+1920x1080               tokens= 2138 img= 2040 preproc=  24.6ms  vision=  56.9ms  lm=  92.3ms  end2end= 174.0ms  p95= 174.7ms
